@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.yuanbug.emoji.domain.constants.EmojiConstants;
 import io.github.yuanbug.emoji.domain.parse.EmojiParseConfig;
 import io.github.yuanbug.emoji.domain.parse.EmojiTailTreeNode;
 import io.github.yuanbug.emoji.domain.sequence.*;
@@ -18,7 +17,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static io.github.yuanbug.emoji.domain.constants.EmojiConstants.SELECTOR_TEXT_PRESENTATION;
 import static io.github.yuanbug.emoji.domain.constants.EmojiConstants.isSelector;
 
 /**
@@ -27,7 +25,7 @@ import static io.github.yuanbug.emoji.domain.constants.EmojiConstants.isSelector
  */
 public class EmojiTextParser {
 
-    private static final String FILE_NAME_EMOJI_LIST = "emoji_full_list_15.1.json";
+    private static final String FILE_NAME_EMOJI_LIST = "emoji_info_15.1.json";
     private static final TypeReference<EmojiSequence> EMOJI_SEQUENCE_TYPE_REFERENCE = new TypeReference<>() {};
     private static final AtomicBoolean TREE_INIT = new AtomicBoolean(false);
 

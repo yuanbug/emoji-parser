@@ -16,7 +16,7 @@ public class EmojiTextParserStepDefinitions {
     private static final EmojiTextParser PARSER = buildParser();
 
     public static void main(String[] args) {
-        PARSER.parse("11\uFE0F⃣").forEach(System.out::println);
+        PARSER.parse("\uD83D\uDC68\uD83C\uDFFF\u200D\uD83E\uDDB1 asd \uD83D\uDC68\uD83C\uDFFB\u200D\uD83C\uDF73").forEach(System.out::println);
 //        System.out.println(PARSER.getLength("\uD83D\uD83D\uDE02"));
     }
 
