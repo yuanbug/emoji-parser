@@ -1,7 +1,6 @@
 package io.github.yuanbug.emoji.domain.sequence;
 
 import io.github.yuanbug.emoji.domain.constants.EmojiConstants;
-import lombok.Getter;
 
 /**
  * @author yuanbug

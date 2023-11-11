@@ -13,12 +13,10 @@ public enum ParseResultSequenceType {
 
     NON_EMOJI_TEXT(false),
 
-    SIMPLE_STICKER(true),
-    KEYCAP(true),
+    STANDARD_EMOJI(true),
     TEXT_PRESENTATION(true),
     EMOJI_PRESENTATION(true),
-    COMBINE_STICKER(true),
-    INVALID(true),
+    INVALID_EMOJI(true),
     ;
 
     public final boolean emoji;

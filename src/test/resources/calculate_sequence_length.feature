@@ -39,7 +39,7 @@ Feature: Calculate sequence length
       | ❤️😂❤️             | 3              |
       | 😂❤️😂❤️😂         | 5              |
       | ❤️asd❤❤️a❤️❤       | 9              |
-#      # keycap
+      # keycap
       | 1️⃣                | 1              |
       | 1️⃣1               | 2              |
       | 11️⃣               | 2              |
@@ -49,14 +49,14 @@ Feature: Calculate sequence length
       | a1️⃣a              | 3              |
       | 1️⃣1️⃣             | 2              |
       | 1️⃣2️⃣3️⃣          | 3              |
-#      # emoji with modifier
+      # emoji with modifier
       | 🐈‍⬛               | 1              |
       | 🐈‍⬛🐈             | 2              |
       | 🐈🐈‍⬛             | 2              |
       | black cat🐈‍⬛      | 10             |
       | 🐈‍⬛black cat      | 10             |
       | black🐈‍⬛cat       | 9              |
-#      # emoji joined by ZWJ
+      # emoji joined by ZWJ
       | 😶‍🌫️             | 1              |
       | 😶‍🌫️😂❤️         | 3              |
       | 😂😶‍🌫️😂❤️😶‍🌫️ | 5              |

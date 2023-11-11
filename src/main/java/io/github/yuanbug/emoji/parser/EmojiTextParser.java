@@ -8,15 +8,17 @@ import io.github.yuanbug.emoji.domain.parse.EmojiParseConfig;
 import io.github.yuanbug.emoji.domain.parse.EmojiTailTreeNode;
 import io.github.yuanbug.emoji.domain.sequence.*;
 import lombok.Builder;
+import lombok.SneakyThrows;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.github.yuanbug.emoji.domain.constants.EmojiConstants.SELECTOR_EMOJI_PRESENTATION;
 import static io.github.yuanbug.emoji.domain.constants.EmojiConstants.isSelector;
 
 /**
@@ -28,12 +30,6 @@ public class EmojiTextParser {
     private static final String FILE_NAME_EMOJI_LIST = "emoji_info_15.1.json";
     private static final TypeReference<EmojiSequence> EMOJI_SEQUENCE_TYPE_REFERENCE = new TypeReference<>() {};
     private static final AtomicBoolean TREE_INIT = new AtomicBoolean(false);
-
-
-    /**
-     * \x{FE0F}
-     */
-    public static final char SELECTOR_EMOJI_PRESENTATION = 65039;
 
     private static final EmojiTailTreeNode root = new EmojiTailTreeNode();
 
@@ -47,15 +43,23 @@ public class EmojiTextParser {
         }
     }
 
+    /**
+     * TODO
+     */
     private final EmojiParseConfig config;
 
-    @Builder
-    private EmojiTextParser(EmojiParseConfig config) throws IOException {
-        initTailTree();
-        this.config = config;
+    public static EmojiTextParser buildDefaultParser() {
+        return EmojiTextParser.builder().build();
     }
 
-    private static void initTailTree() throws IOException {
+    @Builder
+    private EmojiTextParser(EmojiParseConfig config) {
+        initTailTree();
+        this.config = Objects.requireNonNullElseGet(config, EmojiParseConfig::new);
+    }
+
+    @SneakyThrows
+    private static void initTailTree() {
         if (TREE_INIT.get()) {
             return;
         }
@@ -97,7 +101,7 @@ public class EmojiTextParser {
                 return buildPresentation(builder, preData);
             }
             preData = cursor.getData();
-            selecting = !selecting && null != preData && isSelector(ch);
+            selecting = config.combineFollowingSelector && !selecting && null != preData && isSelector(ch);
             if (null == next) {
                 EmojiSequence data = cursor.getData();
                 if (null != data) {
@@ -158,6 +162,17 @@ public class EmojiTextParser {
         return parse(content)
                 .filter(sequence -> !sequence.getType().emoji)
                 .map(ParsedSequence::getContent)
+                .collect(Collectors.joining());
+    }
+
+    public String replaceEmoji(String content, Function<ParsedSequence, String> mapper) {
+        return parse(content)
+                .map(sequence -> {
+                    if (!sequence.getType().emoji) {
+                        return sequence.getContent();
+                    }
+                    return mapper.apply(sequence);
+                })
                 .collect(Collectors.joining());
     }
 

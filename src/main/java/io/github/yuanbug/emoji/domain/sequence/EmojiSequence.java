@@ -1,10 +1,6 @@
 package io.github.yuanbug.emoji.domain.sequence;
 
 import lombok.Builder;
-import lombok.ToString;
-
-import javax.naming.NoInitialContextException;
-import java.util.Collections;
 
 /**
  * @author yuanbug
@@ -21,13 +17,11 @@ public record EmojiSequence(
 
     @Override
     public ParseResultSequenceType getType() {
-        // TODO
-        return ParseResultSequenceType.SIMPLE_STICKER;
+        return ParseResultSequenceType.STANDARD_EMOJI;
     }
 
     @Override
     public String getContent() {
-        // TODO
         return chars;
     }
 

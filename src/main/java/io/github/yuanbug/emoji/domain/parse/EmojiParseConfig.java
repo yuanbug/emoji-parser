@@ -3,6 +3,7 @@ package io.github.yuanbug.emoji.domain.parse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author yuanbug
@@ -10,6 +11,7 @@ import lombok.Getter;
  */
 @Getter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class EmojiParseConfig {
 
@@ -18,6 +20,6 @@ public class EmojiParseConfig {
      * otherwise it is parsed to emoji "❤" and non-emoji text "\x{FE0F}"
      */
     @Builder.Default
-    public final boolean combineFollowingEmojiPresentationSelectorWithOneByteEmoji = true;
+    public final boolean combineFollowingSelector = true;
 
 }
